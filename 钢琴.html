@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+            margin-left: 300px;
+            margin-top: 100px;
+        }
+        li{
+            width: 60px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border: 1px solid #ccc;
+            float: left;
+            position: relative;
+            overflow: hidden;
+        }
+        span{
+            width: 60px;
+            height: 40px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+        i{
+            width: 60px;
+            height: 40px;
+            position: absolute;
+            bottom:-40px;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+     <ul>
+         <li>
+             <span>1</span>
+             <i></i>
+         </li>
+         <li>
+             <span>2</span>
+             <i></i>
+         </li>
+         <li>
+             <span>3</span>
+             <i></i>
+         </li>
+         <li>
+             <span>4</span>
+             <i></i>
+         </li>
+         <li>
+             <span>5</span>
+             <i></i>
+         </li>
+         <li>
+             <span>6</span>
+             <i></i>
+         </li>
+         <li>
+             <span>7</span>
+             <i></i>
+         </li>
+         <li>
+             <span>8</span>
+             <i></i>
+         </li>
+         <li>
+             <span>9</span>
+             <i></i>
+         </li>
+     </ul>
+     <audio src="m/1.mp3"></audio>
+     <audio src="m/2.mp3"></audio>
+     <audio src="m/3.mp3"></audio>
+     <audio src="m/4.mp3"></audio>
+     <audio src="m/5.mp3"></audio>
+     <audio src="m/6.mp3"></audio>
+     <audio src="m/7.mp3"></audio>
+     <audio src="m/c5.mp3"></audio>
+     <audio src="m/d5.mp3"></audio>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.js"></script>
+<script>
+    var arr=['red','green','blue','purple','pink','skyblue','orange','yellow','gray'];
+    var audios=document.querySelectorAll('audio');
+    $('i').each(function(index,el){
+        $(el).css('backgroundColor',arr[index]);
+    });
+    $('li').hover(function(){
+        var index=$(this).index();
+        audios[index].load();
+        audios[index].play();
+        $('i').eq(index).stop().animate({
+            bottom:0
+        },300)
+    },function(){
+        var index=$(this).index();
+        $('i').eq(index).stop().animate({
+            bottom:-40
+        },300)
+    })
+    $(window).keyup(function(e){
+        //console.log(e.keyCode);
+        if(e.keyCode>=49&&e.keyCode<=57){
+            var index=e.keyCode-49;
+            $('li').eq(index).trigger('mouseenter');
+            setTimeout(function(){
+                $('li').eq(index).trigger('mouseleave');
+            },300)
+        }
+    })
+
+</script>
+</html>
